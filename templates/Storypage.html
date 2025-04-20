@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+</head>
+<body class="bg-cover bg-black text-white" >
+    <div class="absolute z-50 h-10">
+        <button onclick="home()"><i class="fa fa-chevron-left fa-xl ml-5 text-white hover:scale-200"></i></button>
+      </div>
+    
+    
+    <div class=" grid grid-cols-1 md:grid-cols-[70%_30%] p-4 gap-4">
+        <!-- Main Video Section (70%) -->
+        <div class="w-full " >
+            <div class="bg-gray-900 rounded-lg p-4">
+                <div class="w-full h-64 md:h-[400px] rounded-lg overflow-hidden">
+                    <iframe 
+                        class="w-full h-full rounded-lg"
+                        id="main-video" 
+                        src="{{ video.link }}" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h2 class="text-white text-xl font-semibold mt-2">{{ video.title }}</h2>
+            </div>
+    
+            <div class="mt-6 bg-gray-900 p-4 rounded-lg ">
+                <h2 class="text-lg font-bold text-white mb-3">Comments</h2>
+            
+                <!-- Comment Input Box -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://th.bing.com/th/id/OIP.lUn7vSETM_EoDN8ULVyVfwHaHa?pid=ImgDet&w=199&h=199&c=7&dpr=1.4" alt="Profile Picture" class="w-10 h-10 rounded-full">
+                    <textarea id="commentInput" class="w-full p-2  bg-gray-800 text-white rounded-lg focus:outline-none" placeholder="Add a comment..."></textarea>
+                    <button onclick="addComment()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Comment</button>
+                </div>
+            
+                <!-- Comments List -->
+                <div id="commentsSection" class="mt-4 space-y-4  p-2  bg-gray-800 text-white rounded-lg focus:outline-none" ">
+                    <!-- Comments will be loaded here dynamically -->
+                </div>
+            </div>
+            
+        </div>
+    
+        <!-- Recommendations Section (30%) -->
+        <div class="w-full space-y-4 ">
+            <h3 class="text-lg font-semibold mb-2">Recommended Videos</h3>
+            <div id="recommendations">
+                {% for rec in recommendations %} <!-- "/story?id={{ rec.id }}" -->
+                <div class="flex items-center space-x-4 bg-gray-800 p-2 rounded-lg mb-2" id="{{ rec.id}}" onclick="loadVideo(this)">
+                    <div>
+                        <img src="{{ rec.picture_url }}" alt="Thumbnail" class="w-40 h-20 rounded-lg">
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold">{{ rec.title }}</h4>
+                        <p class="text-gray-400 text-sm">{{ rec.genre }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="text-lg font-semibold mb-2">Explore More</div>
+            <div class="bg-gray-900  flex flex-col p-4 rounded-xl">
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Image 1 -->
+                    <div class="flex flex-col items-center" onclick="horror()">
+                        <img src="static/horror thumbnail.jpg" class="w-32 h-28 rounded-full border-2 border-white shadow-gray-400 shadow-md hover:scale-105 " alt="Image 1">
+                        <p class="text-white mt-2 text-center">HORROR</p>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="flex flex-col items-center" onclick="romance()">
+                        <img src="static/romance thumbnail.jpg" class="w-32 h-28 rounded-full border-2 border-white shadow-gray-400 shadow-md hover:scale-105 " alt="Image 2">
+                        <p class="text-white mt-2 text-center">ROMANCE</p>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="flex flex-col items-center"  onclick="feelgood()">
+                        <img src="static/feelgoodthumb.jpeg" class="w-32 h-28 rounded-full border-2 border-white shadow-gray-400 shadow-md hover:scale-105 " alt="Image 3">
+                        <p class="text-white mt-2 text-center">FEEL GOOD</p>
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="flex flex-col items-center"  onclick="thriller()">
+                        <img src="static/thrillerthumb.webp" class="w-32 h-28 rounded-full border-2 border-white shadow-gray-400 shadow-md hover:scale-105 " alt="Image 4">
+                        <p class="text-white mt-2 text-center">THRILLER</p>
+                    </div>
+                    <!-- Image 5 -->
+                    <div class="flex flex-col items-center" onclick="cartoon()">
+                        <img src="static/cartoonthumb.jpg" class="w-32 h-28 rounded-full border-2 border-white shadow-gray-400 shadow-md hover:scale-105 " alt="Image 5">
+                        <p class="text-white mt-2 text-center">CARTOON</p>
+                    </div>
+                    <!-- Image 6 -->
+                    <div class="flex flex-col items-center" onclick="motivation()">
+                        <img src="static/motivationalThumb.webp" class="w-32 h-28 rounded-full border-2 border-white shadow-gray-400 shadow-md hover:scale-105 " alt="Image 6">
+                        <p class="text-white mt-2 text-center">MOTIVATIONAL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+    
+    
+    <script src="static/js/homepage.js"></script>
+    <script> 
+
+        function thriller(){
+          window.location.href = "/thriller";
+        }
+
+        function feelgood(){
+          window.location.href = "/feelgood";
+        }
+
+        function romance(){
+          window.location.href = "/romance";
+        }
+
+        function horror(){
+          window.location.href = "/horror";
+        }
+
+        function motivation(){
+          window.location.href = "/motivation";
+        }
+
+        function cartoon(){
+          window.location.href = "/cartoon";
+        }
+     
+function home(){
+    window.location.href = "/home";
+}
+
+    console.log('{{ video.genre }}')
+    if ('{{ video.genre }}' == 'horror'){
+        console.log('{{ video.genre }}')
+        document.body.style.backgroundImage = "url('/static/horror thumbnail.jpg')";
+    } else if('{{ video.genre }}' == 'romance'){
+        document.body.style.backgroundImage = "url('/static/Romance.png')";
+    }else if('{{ video.genre }}' == 'Motivational'){
+        document.body.style.backgroundImage = "url('/static/Motivational.png')";
+    }else if('{{ video.genre }}' == 'cartoon'){
+        document.body.style.backgroundImage = "url('/static/Cartoon (2).png')";
+    }
+
+
+
+
+     document.addEventListener("DOMContentLoaded", function () {
+        const storyId = "{{ video.id }}";  // Ensure video ID is available
+        loadComments(storyId);
+    });  // Store current video ID
+
+        // Function to load comments
+        function loadComments(storyId) {
+    fetch(`/get_comments?story_id=${storyId}`)
+    .then(response => response.json())
+    .then(comments => {
+        console.log("Fetched comments:", comments); // Debugging
+
+        const commentSection = document.getElementById("commentsSection");
+        commentSection.innerHTML = ""; // Clear previous comments
+
+        if (!comments || comments.length === 0) {
+            commentSection.innerHTML = "<p>No comments yet. Be the first to comment!</p>";
+            return;
+        }
+
+        comments.forEach(comment => {
+            const commentDiv = document.createElement("div");
+            commentDiv.classList.add("comment");
+
+            commentDiv.innerHTML = `
+                <p><strong>${comment.username}</strong>: ${comment.comment_text}</p>
+                <small>${new Date(comment.created_at).toLocaleString()}</small>
+                <hr>
+            `;
+            commentSection.appendChild(commentDiv);
+        });
+
+        console.log("Comments successfully loaded into the page.");
+    })
+    .catch(error => {
+        console.error("Error loading comments:", error);
+    });
+}
+
+
+
+        // Function to add a comment
+        function addComment() {
+    const commentText = document.getElementById("commentInput").value.trim();
+    if (!commentText) {
+        alert("Comment cannot be empty!");
+        return;
+    }
+
+    fetch('/add_comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ comment: commentText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.redirect) {
+            console.log("User not logged in. Redirecting to login page...");
+
+            // ✅ Save current page before redirecting
+            localStorage.setItem("returnTo", window.location.href);
+
+            // Redirect to login page
+            window.location.href = data.redirect;
+            return;
+        }
+
+        if (data.error) {
+            alert("Error: " + data.error);
+            return;
+        }
+
+        document.getElementById("commentInput").value = "";  // ✅ Clear input
+        loadComments("{{ video.id }}");  // ✅ Reload comments
+    })
+    .catch(error => {
+        console.error("Error adding comment:", error);
+        alert("Failed to add comment. Please try again.");
+    });
+}
+        </script>
+    
+</body>
+</html>

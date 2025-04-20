@@ -1,0 +1,259 @@
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Responsive Navbar</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="static/js/homepage.js"></script>
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+      <style>
+        /* Enables 3D perspective */
+        .perspective {
+            perspective: 1000px;
+        }
+
+        /* Ensures both sides remain in 3D space */
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        /* Hides the back face of each side */
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+
+        /* Flip effect */
+        .group:hover .flip-card {
+            transform: rotateY(180deg);
+        }
+
+        /* Ensure front & back face are positioned correctly */
+        .flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        /* Positioning both sides properly */
+        .card-front, .card-back {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Front Side */
+        .card-front {
+             /* Tailwind blue-800 */
+           
+            backface-visibility: hidden;
+        }
+
+        /* Back Side */
+        .card-back {
+          /* Tailwind red-600 */
+            color: black;
+            background-color: orangered ;
+           
+          
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+        }
+    </style>
+  </head>
+  <body class="bg-[#0f172a]">
+      <!-- navbar -->
+      <nav class="p-3 flex bg-[#1a1e2b]/70 justify-between items-center sticky top-0 z-50 ">
+        <!-- Brand logo -->
+          <a class="flex gap-2 items-center" href="#" id="brand" >
+              <img class="max-w-12 max-h-12 rounded-full" src="static/62fb1a4b-5350-4df2-8ef5-8ff617801e89.jpg" alt="logo">
+              <span class="text-2xl font-medium font-display text-[#E0E0E0]">Kahaniyaa</span>
+          </a>
+
+          <!-- Center elements -->
+          <div class="hidden md:flex gap-10" id="nav-menu">
+            <button class="text-lg font-semibold  px-2 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0] active" onclick="mainpage()">Home</button>
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0]" onclick="Explore()">Explore More</button>
+          </div>
+
+        <div class="hidden md:flex gap-10">
+        
+          
+          
+          <!-- profile -->
+          <button onclick="Menubar()" id="Profile"  class="px-1 hidden md:block  border-2 bor rounded-full w-11 h-11 border-orange-600">
+            <img id="view-profile-image1" src="https://th.bing.com/th/id/OIP.lUn7vSETM_EoDN8ULVyVfwHaHa?pid=ImgDet&w=199&h=199&c=7&dpr=1.4" alt="Profile Picture"  class="rounded-full">
+            
+          </button>
+        </div>
+
+          <!-- toggle menu <i>-->
+          <button class="p-2 md:hidden" onclick="handlemenu()">
+            <i class="fa-solid fa-bars fa-lg text-[#E0E0E0]"></i>
+          </button>
+
+          <!-- Mobile -->
+          <div id="new-dialog" class=" hidden md:hidden fixed bg-[#1E1E1E] inset-0 p-3 h-52 z-50">
+            <!-- Brand logo -->
+            <div id="nav-bar" class="flex justify-between">
+              <a class="flex gap-2 items-center" href="#" id="brand" >
+                <img class="object-cover max-w-12 max-h-12 rounded-full" src="Kahaniyaa.png" alt="logo">
+                <span class="text-2xl font-medium font-display text-orange-400">Kahaniyaa</span>
+            </a>
+            <!-- Close <i> -->
+            <button class="p-2 md:hidden" onclick="handlemenu()">
+              <i class="fa-solid fa-xmark fa-lg text-orange-400"></i>
+            </button>
+            </div>
+            <!-- Center elements -->
+            <div class="mt-2 bg-[#1E1E1E]">
+              <button class="text-lg font-semibold  px-2 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0] active" onclick="mainpage()">Home</button>
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+  
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+  
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0]" onclick="Explore()">Explore More</button>
+              
+
+              <!-- Profile <i> -->
+              <button class="mx-3 my-3 border-2 bor rounded-full w-12 h-12 border-orange-600">
+                <i class="fa-solid fa-user fa-xl text-[#E0E0E0]" ></i>
+              </button>
+            </div>
+      </nav>
+
+      <!-- Audio page -->
+        <div class="min-h-screen bg-midnight-blue mt-4 mb-5">
+            <h1 class="text-center text-white font-bold text-4xl mb-4">Audio Book</h1>
+
+            <!-- ROW 1-->
+            <div class="container mx-auto mt-2 mb-3">
+              <h1 class="text-center text-white font-semibold text-3xl py-4">Magical Tales for Kids</h1>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1363819810"></iframe>
+                </div>
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/7387223&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/38127670&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- ROW 2 -->
+            <div class="container mx-auto mt-2 mb-3">
+              <h1 class="text-center text-white font-semibold text-3xl py-4">Guides to Spirituality</h1>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1317287083&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/284452266&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1650517729&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- ROW 3 -->
+            <div class="container mx-auto mt-2 mb-3">
+              <h1 class="text-center text-white font-semibold text-3xl py-4">Heritage Stories</h1>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/231731514&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/586304562&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+                <div class="rounded-2xl shadow-gray-400 border-2 border-white hover:scale-105 hover:bg-orange-600 shadow-md duration-300 mt-3 mb-3 p-2">
+                  <iframe class="w-full h-64" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/249380005&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+
+
+
+      <!-- Footer -->
+    <footer>
+      <div class="p-2 bg-gray-800 text-gray-200">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row flex-wrap justify-around gap-2">
+            <!-- First div (Wider width) -->
+            <div class="flex-2 mb-2 me-4 md:w-1/2">
+              <h4 class="text-2xl pb-4">Kahaniyaa</h4>
+              <p class="text-gray-500 text-justify">
+                "Kahaniyaa" is your one-stop destination for immersive stories and engaging experiences. We believe in the power of storytelling to inspire, educate, and connect people across the globe. Whether you're a fan of fantasy, thrillers, or educational tales, Kahaniyaa has something for everyone.
+              </p>
+            </div>
+
+            <!-- Second div (Smaller width) -->
+            <div class="flex-1 mb-2 mt-2 md:w-1/4">
+              <h4 class="pb-4 font-bold">Contact Us</h4>
+              <ul class="text-gray-500">
+                <li class="mt-1 pb-4"><strong>Email:</strong> Kahaniyaa@gmail.com <br></li>
+                <li class="pb-4"><a href="#" class="hover:text-[#E0E0E0]"><strong>Phone:</strong> +91-7069241235</a></li>
+                <li class="mt-1 pb-4"><strong>Address:</strong> <p>101,Mapple Tree,Thaltej,<br>Ahmedabad-360061,Gujarat,India</p></li>
+              </ul>
+            </div>
+
+            <!-- Third div (Smaller width) -->
+            <div class="flex-1 mb-2 mt-2 md:w-1/4">
+              <h4 class="pb-4 mt-1 font-bold">Useful Links</h4>
+              <ul class="text-gray-500">
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold    rounded-xl hover:text-[#E0E0E0]/70 active" onclick="mainpage()">Home</button></li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold  rounded-xl hover:text-[#E0E0E0]/70  "  onclick="audio()">Audiobook</button> </li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold   rounded-xl hover:text-[#E0E0E0]/70  "  onclick="book()">Book</button></li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold   rounded-xl hover:text-[#E0E0E0]/70 " onclick="Explore()">Explore More</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full bg-gray-900 text-gray-500 px-10">
+        <div class="max-w-7xl py-4 mx-auto flex flex-col md:flex-row justify-between items-center">
+          <div class="text-center md:text-left">
+            <div>
+              Copywrite <strong><span>company</span></strong>. All Rights Reserved
+            </div>
+          </div>
+          <div class="text-center text-xl text-white mb-1 mt-1">
+            <a href="https://x.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-twitter fa-xl"></i></a>
+            <a href="https://instagram.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-instagram fa-xl"></i></a>
+            <a href="https://facebook.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-facebook fa-xl"></i></a>
+            <a href="https://in.linkedin.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+      <script src="{{ url_for('static', filename='js/homepage.js') }}" defer></script>
+        
+  </body>
+  </html>

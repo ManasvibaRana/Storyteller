@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body class="bg-[#0f172a] text-[#E0E0E0] min-h-screen flex items-center justify-center">
+   
+  <!-- Profile Page -->
+  <div id="view-profile" class="bg-gray-800 bg-opacity-80 container mx-auto my-auto py-5 rounded-2xl max-w-xl relative">
+    <h1 class="text-4xl text-center font-extrabold text-yellow-500 tracking-wide">Profile</h1>
+
+    <!-- Back Button -->
+    <a id="backbutton" href="#" class="absolute top-4 left-4">
+      <i class="fas fa-arrow-left text-2xl text-[#E0E0E0] transition-transform hover:scale-110 duration-300"></i>
+    </a> 
+
+    <!-- Profile Photo -->
+    <div class="flex justify-center mt-5">
+      <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full group transition-transform hover:scale-110">
+        <!-- Profile Picture (Default) -->
+        <img id="view-profile-image" src="profile.png" alt="Profile Picture" class="w-full h-full object-cover border-4 border-yellow-500 rounded-full">
+  
+        <!-- Camera Icon -->
+        <div class="absolute bottom-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <input type="file" id="profile_image" name="profile_image" class="absolute inset-0 opacity-0 cursor-pointer" onchange="showImage(event)">
+          <button type="button" class="w-9 h-9 bg-yellow-400 bg-opacity-75 text-[#0f172a] rounded-full flex items-center justify-center">
+            <i class="fas fa-camera"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-3">
+      <h2 id="view-username" class="text-2xl font-bold text-[#E0E0E0]">User</h2>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="mt-8 mx-16 space-y-2">
+      <!-- Contact -->
+      <div class="flex justify-between items-center p-3 mx-16 bg-gray-700 bg-opacity-50 hover:bg-gray-600 rounded-md shadow-md transition-all">
+        <label class="text-lg font-medium text-[#E0E0E0]">Contact:</label>
+        <p id="view-contact" class="text-lg text-[#E0E0E0]">+91 1234567890</p>
+      </div>
+
+      <!-- Age -->
+      <div class="flex justify-between items-center p-3 mx-16 bg-gray-700 bg-opacity-50 hover:bg-gray-600 rounded-md shadow-md transition-all">
+        <label class="text-lg font-medium text-[#E0E0E0]">Age:</label>
+        <p id="view-age" class="text-lg text-[#E0E0E0]">18</p>
+      </div>
+
+      <!-- Gender -->
+      <div class="flex justify-between items-center p-3 mx-16 bg-gray-700 bg-opacity-50 hover:bg-gray-600 rounded-md shadow-md transition-all">
+        <label class="text-lg font-medium text-[#E0E0E0]">Gender:</label>
+        <p id="view-gender" class="text-lg text-[#E0E0E0]">Prefer not to say</p>
+      </div>
+    </div>
+
+    <!-- Edit & Logout Button -->
+    <div class="flex justify-center space-x-7 mt-8">
+      <button id="editbtn" onclick="enableEditing()" class="py-2 px-8 bg-yellow-500 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-600 hover:scale-110 transition-all">
+        Edit Profile
+      </button>
+      <button id="logoutBtn" class="py-2 px-8 text-yellow-500 border-2 border-yellow-500 font-semibold rounded-lg hover:bg-yellow-500 hover:text-white hover:scale-110 transition-all">
+        Logout
+      </button>
+    </div>
+
+    <!-- Modal for Logout -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-950 bg-opacity-75 flex justify-center items-center hidden">
+      <div class="bg-gray-800 p-8 sm:p-8 md:p-10 rounded-md w-96 shadow-lg relative sm:w-96 md:w-1/2 lg:w-1/3">
+        <span id="closeBtn" class="absolute top-2 right-4 text-2xl text-[#E0E0E0] cursor-pointer hover:font-bold hover:scale-110">&times;</span>
+        <h2 class="text-xl font-semibold text-center mb-4 pt-2 text-[#E0E0E0]">Are you sure you want to logout?</h2>
+        <div class="flex justify-center flex-wrap space-x-4">
+          <button id="confirmLogout" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 hover:scale-105 sm:mb-0">Yes, Logout</button>
+          <button id="cancelLogout" class="px-4 py-2 bg-gray-700 text-[#E0E0E0] rounded-md hover:bg-gray-600 hover:scale-105">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div id="editprofile" class="container mx-auto my-10 h-auto px-20 sm:px-10 py-8 bg-gray-800 shadow-lg rounded-md max-w-xl hidden border-2 border-yellow-500 relative">
+    <!-- Back Button -->
+    <a id="backbtn" href="#" class="absolute top-4 left-4 text-yellow-500 hover:text-yellow-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </a>
+    <h1 class="text-3xl font-extrabold text-center text-yellow-500 mb-6">Edit Profile</h1>
+    <form id="profileForm" action="#" method="POST" enctype="multipart/form-data">
+      <!-- Username -->
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-[#E0E0E0]">Username</label>
+        <input type="text" id="name" name="name" value="Username" class="mt-2 w-full p-3 border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-600 bg-gray-700 text-[#E0E0E0]" required/>
+      </div>
+      
+      <!-- Contact -->
+      <div class="mb-4">
+        <label for="contact" class="block text-sm font-medium text-[#E0E0E0]">Contact</label>
+        <input type="tel" id="contact" name="contact" value="1234567890" class="mt-2 w-full p-3 border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-600 bg-gray-700 text-[#E0E0E0]" pattern="^[1-9][0-9]{9}$" title="Phone number must be 10 digits, starting with a number from 1-9" required/>
+      </div>
+      
+      <!-- Age -->
+      <div class="mb-4">
+        <label for="age" class="block text-sm font-medium text-[#E0E0E0]">Age</label>
+        <input type="number" id="age" name="age" value="18" class="mt-2 w-full p-3 border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-600 bg-gray-700 text-[#E0E0E0]" required/>
+      </div>
+      
+      <!-- Gender -->
+      <div class="mb-4">
+        <label for="gender" class="block text-sm font-medium text-[#E0E0E0]">Gender</label>
+        <select id="gender" name="gender" class="mt-2 w-full p-3 border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-600 bg-gray-700 text-[#E0E0E0]">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer not to say" selected>Prefer not to say</option>
+        </select>
+      </div>
+      
+      <!-- New Password -->
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-[#E0E0E0]">New Password</label>
+        <input type="password" id="password" name="password" class="mt-2 w-full p-3 border border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-600 bg-gray-700 text-[#E0E0E0]">
+      </div>
+      
+      <!-- Save Changes Button -->
+      <div class="mt-6 flex justify-center">
+        <button id="savebtn" type="submit" class="w-full py-3 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-600">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Get elements
+    const modal = document.getElementById("logoutModal");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const cancelBtn = document.getElementById("cancelLogout");
+    const confirmBtn = document.getElementById("confirmLogout");
+    const backbtn = document.getElementById("backbtn");
+    const edit = document.getElementById('editprofile');
+    const profile = document.getElementById('view-profile');
+
+    // Show modal when logout button is clicked
+    logoutBtn.onclick = function() {
+      modal.classList.remove("hidden");
+      modal.children[0].classList.remove("scale-95");
+      modal.children[0].classList.add("scale-100");
+    };
+
+    // Close modal when 'x' or 'Cancel' is clicked
+    closeBtn.onclick = function() {
+      modal.classList.add("hidden");
+    };
+
+    cancelBtn.onclick = function() {
+      modal.classList.add("hidden");
+    };
+
+    // Confirm logout
+    confirmBtn.onclick = function() {
+      // Redirect to login page
+      window.location.href = "#";
+      modal.classList.add("hidden");
+    };
+
+    // Close modal if clicked outside of modal content
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.classList.add("hidden");
+      }
+    };
+
+    // Function to show the selected image preview
+    function showImage(event) {
+      var output = document.getElementById('view-profile-image'); // Reference to the profile image container
+      var reader = new FileReader(); // Create a new FileReader instance
+
+      reader.onload = function() {
+        // Set the new image source to the result of the file reader
+        output.src = reader.result;
+      };
+
+      // Read the selected file as a Data URL
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Function to enable editing by toggling visibility of the form
+    function enableEditing() {
+      edit.classList.remove('hidden'); // Show the Edit Profile form
+      profile.classList.add('hidden'); // Hide the view profile info
+    }
+
+    // Close Edit Profile when back button is clicked 
+    backbtn.onclick = function(){
+      edit.classList.add('hidden'); // Hide the Edit Profile form
+      profile.classList.remove('hidden'); // Show the view profile info
+    };
+
+    // Handle "Save Changes" button click
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent actual form submission
+
+      const form = event.target;
+
+      if (!form.checkValidity()) {
+        form.reportValidity(); // Show validation errors
+      } else {
+        // Get form values
+        const profileData = {
+          username: document.getElementById('name').value,
+          contact: document.getElementById('contact').value,
+          age: document.getElementById('age').value,
+          gender: document.getElementById('gender').value
+        };
+
+        // Store data in localStorage
+        localStorage.setItem('profileData', JSON.stringify(profileData));
+
+        // Display the profile details
+        displayProfileDetails(profileData);
+
+        // Hide edit section and show profile details section
+        edit.classList.add('hidden');
+        profile.classList.remove('hidden');
+      }
+    });
+
+    // Function to display profile details
+    function displayProfileDetails(data) {
+      document.getElementById('view-username').innerText = data.username;
+      document.getElementById('view-contact').innerText = data.contact;
+      document.getElementById('view-age').innerText = data.age;
+      document.getElementById('view-gender').innerText = data.gender;
+    }
+
+    // Load profile data on page load
+    window.onload = function() {
+      const savedData = JSON.parse(localStorage.getItem('profileData'));
+      if (savedData) {
+        displayProfileDetails(savedData);
+        edit.classList.add('hidden');
+        profile.classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>

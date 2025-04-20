@@ -1,0 +1,180 @@
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Responsive Navbar</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="static/js/homepage.js"></script>
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  </head>
+  <body class="bg-[#0f172a]">
+      <!-- navbar -->
+      <nav class="p-3 flex bg-[#1a1e2b]/70 justify-between items-center sticky top-0 z-50 ">
+        <!-- Brand logo -->
+          <a class="flex gap-2 items-center" href="#" id="brand" >
+              <img class="max-w-12 max-h-12 rounded-full" src="static/62fb1a4b-5350-4df2-8ef5-8ff617801e89.jpg" alt="logo">
+              <span class="text-2xl font-medium font-display text-[#E0E0E0]">Kahaniyaa</span>
+          </a>
+
+          <!-- Center elements -->
+          <div class="hidden md:flex gap-10" id="nav-menu">
+            <button class="text-lg font-semibold  px-2 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0] active" onclick="mainpage()">Home</button>
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0]" onclick="Explore()">Explore More</button>
+          </div>
+
+        <div class="hidden md:flex gap-10">
+          
+          
+          <!-- profile -->
+          <button onclick="Menubar()" id="Profile"  class="px-1 hidden md:block  border-2 bor rounded-full w-11 h-11 border-orange-600">
+            <img id="view-profile-image1" src="https://th.bing.com/th/id/OIP.lUn7vSETM_EoDN8ULVyVfwHaHa?pid=ImgDet&w=199&h=199&c=7&dpr=1.4" alt="Profile Picture"  class="rounded-full">
+            
+          </button>
+        </div>
+
+          <!-- toggle menu <i>-->
+          <button class="p-2 md:hidden" onclick="handlemenu()">
+            <i class="fa-solid fa-bars fa-lg text-[#E0E0E0]"></i>
+          </button>
+
+          <!-- Mobile -->
+          <div id="new-dialog" class=" hidden md:hidden fixed bg-[#1E1E1E] inset-0 p-3 h-52 z-50">
+            <!-- Brand logo -->
+            <div id="nav-bar" class="flex justify-between">
+              <a class="flex gap-2 items-center" href="#" id="brand" >
+                <img class="object-cover max-w-12 max-h-12 rounded-full" src="Kahaniyaa.png" alt="logo">
+                <span class="text-2xl font-medium font-display text-orange-400">Kahaniyaa</span>
+            </a>
+            <!-- Close <i> -->
+            <button class="p-2 md:hidden" onclick="handlemenu()">
+              <i class="fa-solid fa-xmark fa-lg text-orange-400"></i>
+            </button>
+            </div>
+            <!-- Center elements -->
+            <div class="mt-2 bg-[#1E1E1E]">
+              <a class="font-medium mx-2 my-2 p-2 block rounded-md hover:bg-orange-600 hover:text-white text-[#E0E0E0]" href="#">Home</a>
+              <a class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]" href="#">Explore More</a>
+              <a class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]" href="#">Book</a>
+
+              <!-- Profile <i> -->
+              <button class="mx-3 my-3 border-2 bor rounded-full w-12 h-12 border-orange-600">
+                <i class="fa-solid fa-user fa-xl text-[#E0E0E0]" ></i>
+              </button>
+            </div>
+      </nav>
+
+      <!-- Genre -->
+      <div class="bg-midnight-blue mt-4 mb-5">
+        <h1 class="text-center text-white font-bold text-4xl mb-4">Romance</h1>
+      </div>
+      
+      <div class="max-w-7xl px-3 mx-auto mb-16">
+        <div  id="romance4" onclick="loadVideo(this)" class="block mb-5">
+          <div class="flex flex-col md:flex-row bg-light-charcoal border-2 border-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl  hover:scale-105 transition-transform duration-300 ease-in-out">
+            <img src="static/DESTINY.jpg" alt="Story 1" class="w-full md:w-1/3 object-cover">
+            <div class="p-4 md:p-6 text-white">
+              <h2 class="font-bold text-2xl mb-2">Destiny</h2>
+              <p class="mb-4">"Destiny" is an award-winning Hindi romantic drama comedy short film that presents a bitter-sweet and charming tale. The narrative has received fantastic reviews for its engaging storytelling and has been described as a must-watch.</p>
+            </div>
+          </div>
+        </div>
+      
+        <div  id="romance" onclick="loadVideo(this)" class="block mb-5">
+          <div class="flex flex-col md:flex-row-reverse bg-light-charcoal border-2 border-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
+            <img src="static/LIFT.jpg" alt="Story 2" class="w-full md:w-1/3 object-cover">
+            <div class="p-4 md:p-6 text-white">
+              <h2 class="font-bold text-2xl mb-2">Lift</h2>
+              <p class="mb-4">"LIFT" is a short film directed by Ida Ali that explores the intriguing dynamics between two individuals who frequently encounter each other in an elevator. The narrative delves into the subtle yet profound connections that can form in everyday settings, prompting viewers to reflect on the unspoken bonds we share with strangers. The film was a finalist in the Filmfare Short Film Awards 2018.</p>
+            </div>
+          </div>
+        </div>
+      
+        <div id="A1" onclick="loadVideo(this)" class="block mb-5">
+          <div class="flex flex-col md:flex-row bg-light-charcoal border-2 border-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
+            <img src="static/TWIN FLAMES.jpg" alt="Story 3" class="w-full md:w-1/3 object-cover">
+            <div class="p-4 md:p-6 text-white">
+              <h2 class="font-bold text-2xl mb-2">Twin Flames</h2>
+              <p class="mb-4">"Twin Flames" is a romantic short film that tells the captivating tale of Naina and Aman. As fate intertwines their paths, the narrative explores the profound connection between the two characters, delving into themes of destiny and love.</p>
+            </div>
+          </div>
+        </div>
+      
+        <div  id="romance" onclick="loadVideo(this)" class="block mb-5">
+          <div class="flex flex-col md:flex-row-reverse bg-light-charcoal border-2 border-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
+            <img src="static/MILLIONAIRE TRAPED ME.jpg" alt="Story 4" class="w-full md:w-1/3 object-cover">
+            <div class="p-4 md:p-6 text-white">
+              <h2 class="font-bold text-2xl mb-2">Millionaire Traped Me </h2>
+              <p class="mb-4">The video titled "My Mom Forced Me To Marry For Money | LOVE STORY" presents a narrative about a young girl whose mother compels her to marry a wealthy individual. The story delves into the emotional and moral dilemmas faced by the girl as she navigates the pressures from her mother against her own desires and values. It highlights themes of familial obligation, personal autonomy, and the societal emphasis on wealth in marital decisions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <!-- Footer -->
+    <footer>
+        <div class="p-2 bg-gray-800 text-gray-200">
+          <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row flex-wrap justify-around gap-2">
+              <!-- First div (Wider width) -->
+              <div class="flex-2 mb-2 me-4 md:w-1/2">
+                <h4 class="text-2xl pb-4">Kahaniyaa</h4>
+                <p class="text-gray-500 text-justify">
+                  "Kahaniyaa" is your one-stop destination for immersive stories and engaging experiences. We believe in the power of storytelling to inspire, educate, and connect people across the globe. Whether you're a fan of fantasy, thrillers, or educational tales, Kahaniyaa has something for everyone.
+                </p>
+              </div>
+  
+              <!-- Second div (Smaller width) -->
+              <div class="flex-1 mb-2 mt-2 md:w-1/4">
+                <h4 class="pb-4 font-bold">Contact Us</h4>
+                <ul class="text-gray-500">
+                  <li class="mt-1 pb-4"><strong>Email:</strong> Kahaniyaa@gmail.com <br></li>
+                  <li class="pb-4"><a href="#" class="hover:text-[#E0E0E0]"><strong>Phone:</strong> +91-7069241235</a></li>
+                  <li class="mt-1 pb-4"><strong>Address:</strong> <p>101,Mapple Tree,Thaltej,<br>Ahmedabad-360061,Gujarat,India</p></li>
+                </ul>
+              </div>
+  
+              <!-- Third div (Smaller width) -->
+              <div class="flex-1 mb-2 mt-2 md:w-1/4">
+                <h4 class="pb-4 mt-1 font-bold">Useful Links</h4>
+                <ul class="text-gray-500">
+                  <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i><a href="#" class="hover:text-[#E0E0E0]">Home</a></li>
+                  <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i><a href="#" class="hover:text-[#E0E0E0]">About us</a></li>
+                  <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i><a href="#" class="hover:text-[#E0E0E0]">Terms and condition</a></li>
+                  <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i><a href="#" class="hover:text-[#E0E0E0]">Private policy</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="w-full bg-gray-900 text-gray-500 px-10">
+          <div class="max-w-7xl py-4 mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="text-center md:text-left">
+              <div>
+                Copywrite <strong><span>company</span></strong>. All Rights Reserved
+              </div>
+            </div>
+            <div class="text-center text-xl text-white mb-1 mt-1">
+              <a href="https://x.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-twitter fa-xl"></i></a>
+              <a href="https://instagram.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-instagram fa-xl"></i></a>
+              <a href="https://facebook.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-facebook fa-xl"></i></a>
+              <a href="https://in.linkedin.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <script src="{{ url_for('static', filename='js/homepage.js') }}" defer></script>
+        
+  </body>
+  </html>

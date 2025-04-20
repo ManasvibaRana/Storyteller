@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <style>
+        
+      .book-container {
+          position: relative;
+          width: 1000px;
+          height: 600px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          perspective: 1200px;
+          /* border: 8px solid #cb3d0d; */
+          background: white;
+          box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+          border-radius: 12px;
+      }
+
+      .page {
+          position: absolute;
+          width: 50%;
+          height: 100%;
+          backface-visibility: hidden;
+          transform-origin: left;
+          transition: transform 0.8s ease-in-out;
+          border-radius: 6px;
+          overflow: hidden;
+      }
+
+      .left-page {
+          left: 0;
+          transform-origin: right;
+      }
+
+      .right-page {
+          right: 0;
+          transform-origin: left;
+          z-index: 2;
+      }
+
+      @keyframes flipNext {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(-180deg); }
+      }
+      @keyframes flipPrev {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(180deg); }
+      }
+      .flipping-next {
+          animation: flipNext 1.8s forwards;
+      }
+      .flipping-prev {
+          animation: flipPrev 1.8s forwards;
+      }
+
+      .back-cover {
+          position: absolute;
+          width: 50%;
+          height: 100%;
+          background: white;
+          transform: rotateY(180deg);
+          backface-visibility: hidden;
+      }
+
+      .btn {
+          transition: all 0.3s ease-in-out;
+      }
+
+      .btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+      }
+  </style>
+</head>
+<body class="bg-[#0f172a]">
+    <!-- navbar -->
+    <nav id="navbar" class="p-3 flex bg-[#1a1e2b] justify-between items-center sticky top-0 z-50 ">
+        <!-- Brand logo -->
+          <a class="flex gap-2 items-center" href="#" id="brand" >
+              <img class="max-w-12 max-h-12 rounded-full" src="static/62fb1a4b-5350-4df2-8ef5-8ff617801e89.jpg" alt="logo">
+              <span class="text-2xl font-medium font-display text-[#E0E0E0]">Kahaniyaa</span>
+          </a>
+
+          <!-- Center elements -->
+          <div class="hidden md:flex gap-10" id="nav-menu">
+            <button class="text-lg font-semibold  px-2 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0] active" onclick="mainpage()">Home</button>
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0]" onclick="Explore()">Explore More</button>
+          </div>
+
+        <div class="hidden md:flex gap-10">
+          <!-- Search Bar -->
+          
+          
+          <!-- profile -->
+          <button onclick="Menubar()" id="Profile"  class="px-1 hidden md:block  border-2 bor rounded-full w-11 h-11 border-orange-600">
+            <img id="view-profile-image1" src="https://th.bing.com/th/id/OIP.lUn7vSETM_EoDN8ULVyVfwHaHa?pid=ImgDet&w=199&h=199&c=7&dpr=1.4" alt="Profile Picture"  class="rounded-full">
+            
+          </button>
+        </div>
+
+          <!-- toggle menu <i>-->
+          <button class="p-2 md:hidden" onclick="handlemenu()">
+            <i class="fa-solid fa-bars fa-lg text-[#E0E0E0]"></i>
+          </button>
+
+          <!-- Mobile -->
+          <div id="new-dialog" class=" hidden md:hidden fixed bg-[#1E1E1E] inset-0 p-3 h-52 z-50">
+            <!-- Brand logo -->
+            <div id="nav-bar" class="flex justify-between">
+              <a class="flex gap-2 items-center" href="#" id="brand" >
+                <img class="object-cover max-w-12 max-h-12 rounded-full" src="Kahaniyaa.png" alt="logo">
+                <span class="text-2xl font-medium font-display text-orange-400">Kahaniyaa</span>
+            </a>
+            <!-- Close <i> -->
+            <button class="p-2 md:hidden" onclick="handlemenu()">
+              <i class="fa-solid fa-xmark fa-lg text-orange-400"></i>
+            </button>
+            </div>
+            <!-- Center elements -->
+            <div class="mt-2 bg-[#1E1E1E]">
+              <button class="text-lg font-semibold  px-2 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0] active" onclick="mainpage()">Home</button>
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+  
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+  
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0]" onclick="Explore()">Explore More</button>
+             
+
+              <!-- Profile <i> -->
+              <button class="mx-3 my-3 border-2 bor rounded-full w-12 h-12 border-orange-600">
+                <i class="fa-solid fa-user fa-xl text-[#E0E0E0]" ></i>
+              </button>
+            </div>
+      </nav>
+
+        <div id="bookshelfContainer"  class="relative md:pl-5" style="background-image: url(static/wooden-shelf.jpg);">
+            <img src="static/wood.jpg" class="h-[525px] mx-auto ">
+            <img src="static/wood.jpg" class="h-[525px] md:hidden mx-auto">
+            <div class="absolute top-[86px] w-full flex justify-center">
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-x-16 gap-y-[108px]">
+                    <!-- Books -->
+                    <!-- <div class="absolute top-[154px] flex gap-16"> --> 
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer" 
+                          title="The Secret" src="/static/The_Secret/The-Secret-by-Rhonda-Byrne (1)_page-0001.jpg" alt="Book 1" onclick="openBook('1')">
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer"
+                        src="https://covers.openlibrary.org/b/id/8219252-L.jpg" alt="Book 2" onclick="openBook('2')">
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer"
+                          src="https://covers.openlibrary.org/b/id/8219252-L.jpg" alt="Book 3" onclick="openBook('3')">
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer"
+                          src="https://covers.openlibrary.org/b/id/8231493-L.jpg" alt="Book 4" onclick="openBook('4')">
+                    <!-- </div> -->
+                    <!-- Books -->
+                    <!-- <div class="absolute top-[390px] flex gap-16"> -->
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer mt-12 md:mt-0"
+                            src="https://covers.openlibrary.org/b/id/8244151-L.jpg" alt="Book 1" onclick="openBook('5')">
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer mt-12 md:mt-0"
+                            src="https://covers.openlibrary.org/b/id/8284446-L.jpg" alt="Book 2" onclick="openBook('6')">
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer "
+                            src="https://covers.openlibrary.org/b/id/8219252-L.jpg" alt="Book 3" onclick="openBook('7')">
+                        <img class="w-24 h-32 transition-transform duration-300 hover:-translate-y-4 cursor-pointer "
+                            src="https://covers.openlibrary.org/b/id/8231493-L.jpg" alt="Book 4" onclick="openBook('8')">
+                    </div>
+            </div>
+        </div>
+
+
+
+       <!-- Fullscreen Iframe -->
+      <!-- <div id="iframeContainer" class="hidden fixed inset-0 bg-black flex justify-center items-center">
+        <button onclick="closeBook()" class="absolute top-5 left-5 bg-white px-4 py-2 rounded shadow">← Back</button>
+        <iframe id="bookIframe" class="w-full h-full"></iframe>
+      </div> -->
+
+      <div id="book" class="hidden">
+        <div class="absolute">
+          <button onclick="book()"><i class="fa fa-chevron-left fa-xl ml-5 text-white hover:scale-200"></i></button>
+        </div>
+
+        <div class="my-6 h-auto w-100 flex flex-wrap flex-col items-center ">
+          <div class="text-center text-white font-bold text-3xl">The Secret</div>
+        </div>
+ 
+ 
+         <div class="flex flex-col flex-wrap items-center justify-center min-h-screen">
+             <div class="book-container ">
+                 <!-- Left Page -->
+                 <div class="page pr-1 left-page cursor-pointer" onclick="prevPage()">
+                     <img id="leftPage" src="The_Secret/The-Secret-by-Rhonda-Byrne (1)_page-0001.jpg" alt="1Page"
+                         class="w-full h-full shadow-[10px_0_15px_rgba(0,0,0,0.3)] object-cover">
+                 </div>
+                 <!-- Right Page -->
+                 <div class="page pl-1 right-page cursor-pointer" onclick="nextPage()">
+                     <img id="rightPage" src="The_Secret/The-Secret-by-Rhonda-Byrne (1)_page-0002.jpg" alt="2Page"
+                         class="w-full h-full shadow-[inset_10px_0_15px_rgba(0,0,0,0.3)] object-cover">
+                 </div>
+                 <!-- Back Cover (Prevents Inverted Image) -->
+                 <div class="back-cover"></div>
+             </div>
+         </div>
+ 
+         <!-- Navigation Buttons -->
+         <div class="flex flex-wrap items-center justify-center gap-4 my-6">
+             <button id="prevBtn" onclick="prevPage()"
+             class="btn px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-full shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300">
+             <i class="fa fa-chevron-left"></i> Previous
+             </button>
+             <button id="fullscreenBtn"
+             class="btn px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-800 font-bold rounded-full shadow-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300">
+             🔲 Fullscreen
+             </button>
+             <button id="nextBtn" onclick="nextPage()"
+             class="btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white font-bold rounded-full shadow-lg hover:from-green-600 hover:to-green-800 transition-all duration-300">
+             Next <i class="fa fa-chevron-right"></i>
+             </button>
+         </div>
+     </div>
+      
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="p-2 bg-gray-800 text-gray-200">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row flex-wrap justify-around gap-2">
+            <!-- First div (Wider width) -->
+            <div class="flex-2 mb-2 me-4 md:w-1/2">
+              <h4 class="text-2xl pb-4">Kahaniyaa</h4>
+              <p class="text-gray-500 text-justify">
+                "Kahaniyaa" is your one-stop destination for immersive stories and engaging experiences. We believe in the power of storytelling to inspire, educate, and connect people across the globe. Whether you're a fan of fantasy, thrillers, or educational tales, Kahaniyaa has something for everyone.
+              </p>
+            </div>
+
+            <!-- Second div (Smaller width) -->
+            <div class="flex-1 mb-2 mt-2 md:w-1/4">
+              <h4 class="pb-4 font-bold">Contact Us</h4>
+              <ul class="text-gray-500">
+                <li class="mt-1 pb-4"><strong>Email:</strong> Kahaniyaa@gmail.com <br></li>
+                <li class="pb-4"><a href="#" class="hover:text-[#E0E0E0]"><strong>Phone:</strong> +91-7069241235</a></li>
+                <li class="mt-1 pb-4"><strong>Address:</strong> <p>101,Mapple Tree,Thaltej,<br>Ahmedabad-360061,Gujarat,India</p></li>
+              </ul>
+            </div>
+
+            <!-- Third div (Smaller width) -->
+            <div class="flex-1 mb-2 mt-2 md:w-1/4">
+              <h4 class="pb-4 mt-1 font-bold">Useful Links</h4>
+              <ul class="text-gray-500">
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold    rounded-xl hover:text-[#E0E0E0]/70 active" onclick="mainpage()">Home</button></li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold  rounded-xl hover:text-[#E0E0E0]/70  "  onclick="audio()">Audiobook</button> </li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold   rounded-xl hover:text-[#E0E0E0]/70  "  onclick="book()">Book</button></li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold   rounded-xl hover:text-[#E0E0E0]/70 " onclick="Explore()">Explore More</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full bg-gray-900 text-gray-500 px-10">
+        <div class="max-w-7xl py-4 mx-auto flex flex-col md:flex-row justify-between items-center">
+          <div class="text-center md:text-left">
+            <div>
+              Copywrite <strong><span>company</span></strong>. All Rights Reserved
+            </div>
+          </div>
+          <div class="text-center text-xl text-white mb-1 mt-1">
+            <a href="https://x.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-twitter fa-xl"></i></a>
+            <a href="https://instagram.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-instagram fa-xl"></i></a>
+            <a href="https://facebook.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-facebook fa-xl"></i></a>
+            <a href="https://in.linkedin.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+      
+  <script src="static/js/homepage.js"></script>
+    <script>
+      function openBook(id) {
+            document.getElementById("bookshelfContainer").classList.add("hidden");
+            document.getElementById("navbar").classList.add("hidden");
+            document.getElementById("footer").classList.add("hidden");
+            document.getElementById("book").classList.remove("hidden");
+      }
+
+        function closeBook() {
+            document.getElementById("book").classList.add("hidden");
+            document.getElementById("bookshelfContainer").classList.remove("hidden");
+            document.getElementById("navbar").classList.remove("hidden");
+            document.getElementById("footer").classList.remove("hidden");
+      }
+        
+        // Generate the pages dynamically
+        const pages=[]
+        for(var i=1;i<207;i++){
+            if(i<10){
+                pages.push( "static/The_Secret/The-Secret-by-Rhonda-Byrne (1)_page-000"+i+".jpg")
+            }else if(i<100){
+                pages.push( "static/The_Secret/The-Secret-by-Rhonda-Byrne (1)_page-00"+i+".jpg")
+            }else{
+              pages.push( "static/The_Secret/The-Secret-by-Rhonda-Byrne (1)_page-0"+i+".jpg")
+            }
+        }
+
+        let currentIndex = 0;
+        const leftPage = document.querySelector(".left-page");
+        const rightPage = document.querySelector(".right-page");
+        const leftImage = document.getElementById("leftPage");
+        const rightImage = document.getElementById("rightPage");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        function updatePages() {
+            leftImage.src = pages[currentIndex] || "";
+            rightImage.src = pages[currentIndex + 1] || "";
+
+            // Disable buttons when necessary
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex + 2 >= pages.length;
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") nextPage();
+            if (e.key === "ArrowLeft") prevPage();
+            if (e.key === "f" || e.key === "F") toggleFullscreen();
+        });
+
+        function nextPage() {
+            if (currentIndex + 2 < pages.length) {
+                rightPage.classList.add("flipping-next");
+                setTimeout(() => {
+                    currentIndex += 2;
+                    updatePages();
+                    rightPage.classList.remove("flipping-next");
+                }, 600);
+            }
+        }
+
+        function prevPage() {
+            if (currentIndex - 2 >= 0) {
+                leftPage.classList.add("flipping-prev");
+                setTimeout(() => {
+                    currentIndex -= 2;
+                    updatePages();
+                    leftPage.classList.remove("flipping-prev");
+                }, 800);
+            }
+        }
+
+        let isFullscreen = false;
+
+        function toggleFullscreen() {
+            const bookContainer = document.querySelector(".book-container");
+
+            if (!isFullscreen) {
+                if (bookContainer.requestFullscreen) {
+                    bookContainer.requestFullscreen();
+                } else if (bookContainer.mozRequestFullScreen) {
+                    bookContainer.mozRequestFullScreen();
+                } else if (bookContainer.webkitRequestFullscreen) {
+                    bookContainer.webkitRequestFullscreen();
+                } else if (bookContainer.msRequestFullscreen) {
+                    bookContainer.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        document.getElementById("fullscreenBtn").addEventListener("click", () => {
+            toggleFullscreen();
+            isFullscreen = !isFullscreen;
+            updateFullscreenMode();
+        });
+
+        function updateFullscreenMode() {
+            const leftPage = document.querySelector(".left-page");
+            const rightPage = document.querySelector(".right-page");
+        }
+
+        document.addEventListener("fullscreenchange", () => {
+            isFullscreen = !!document.fullscreenElement;
+            updateFullscreenMode();
+        });
+
+        // Initialize buttons on load
+        updatePages();
+    </script>
+</body>
+</html>

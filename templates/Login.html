@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="Style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f172a] text-[#E0E0E0]">
+  <div class="flex items-center justify-center h-screen">
+    <div class="border-2 rounded-xl border-yellow-500 shadow-xl shadow-yellow-700 bg-gray-800 my-auto px-32 w-fit mx-auto py-10">
+      <div class="flex items-center justify-center space-x-2">
+        <img src="static/62fb1a4b-5350-4df2-8ef5-8ff617801e89.jpg" class="rounded-full inline-block align-middle" style="height: 60px; width: 60px;">
+        <span class="text-yellow-500 font-extrabold text-center text-4xl inline-block align-middle">
+          Kahaniyaa
+        </span>
+      </div>
+
+      <div>
+        <div class="mt-9 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form class="space-y-6" action="/login" method="POST">
+            <div>
+              <label for="username" class="block text-sm/6 font-medium text-yellow-500">Username</label>
+              <div class="mt-1">
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  required
+                  class="block w-full rounded-md bg-gray-700 px-3 py-1.5 text-base text-[#E0E0E0] outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-500 sm:text-sm/6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between">
+                <label for="password" class="block text-sm/6 font-medium text-yellow-500">Password</label>
+              </div>
+              <div class="mt-2">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  autocomplete="current-password"
+                  required
+                  class="block w-full rounded-md bg-gray-700 px-3 py-1.5 text-base text-[#E0E0E0] outline outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-yellow-500 sm:text-sm/6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-yellow-600 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <form action="/Signup" method="GET" class="text-center mt-5">
+        <span class="text-[#E0E0E0]">Don't have an account?</span>
+        <button onclick="sing()" class="text-yellow-400 hover:underline" >Signup</button>
+      </form>
+    </div>
+
+    
+  </div>
+
+
+  <script>
+    function sing(){
+      window.location.href = "/Signup";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flip Animation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <!-- Book Container -->
+    <div class="relative w-64 h-96 perspective">
+        <!-- Pages -->
+        <div class="absolute w-full h-full transform-style-preserve-3d transition-transform duration-1000" id="book">
+            <div class="absolute w-full h-full bg-white border border-gray-200 flex items-center justify-center backface-hidden" id="page1">Page 1</div>
+            <div class="absolute w-full h-full bg-white border border-gray-200 flex items-center justify-center backface-hidden transform rotate-y-180" id="page2">Page 2</div>
+            <div class="absolute w-full h-full bg-white border border-gray-200 flex items-center justify-center backface-hidden transform rotate-y-180" id="page3">Page 3</div>
+            <!-- Add more pages as needed -->
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="mt-8">
+        <button id="prevBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg mr-4">Previous</button>
+        <button id="nextBtn" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Next</button>
+    </div>
+
+    <script>
+        // JavaScript for flipping pages
+        const book = document.getElementById('book');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentPage = 1;
+        const totalPages = 3; // Update this to match the number of pages
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                book.style.transform = `rotateY(${currentPage * 180}deg)`;
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                book.style.transform = `rotateY(${currentPage * 180}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>

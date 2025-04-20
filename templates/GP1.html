@@ -1,0 +1,431 @@
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Responsive Navbar</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="static/js/homepage.js"></script>
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+      <style>
+        /* Enables 3D perspective */
+        .perspective {
+            perspective: 1000px;
+        }
+
+        /* Ensures both sides remain in 3D space */
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+
+        /* Hides the back face of each side */
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+
+        /* Flip effect */
+        .group:hover .flip-card {
+            transform: rotateY(180deg);
+        }
+
+        /* Ensure front & back face are positioned correctly */
+        .flip-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        /* Positioning both sides properly */
+        .card-front, .card-back {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Front Side */
+        .card-front {
+             /* Tailwind blue-800 */
+           
+            backface-visibility: hidden;
+        }
+
+        /* Back Side */
+        .card-back {
+          /* Tailwind red-600 */
+            color: black;
+           
+           
+          
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+        }
+    </style>
+  </head>
+  <body class="bg-[#0f172a]">
+      <!-- navbar -->
+      <nav class="p-3 flex bg-[#1a1e2b]/70 justify-between items-center sticky top-0 z-50 ">
+        <!-- Brand logo -->
+          <a class="flex gap-2 items-center" href="#" id="brand" >
+              <img class="max-w-12 max-h-12 rounded-full" src="static/62fb1a4b-5350-4df2-8ef5-8ff617801e89.jpg" alt="logo">
+              <span class="text-2xl font-medium font-display text-[#E0E0E0]">Kahaniyaa</span>
+          </a>
+
+          <!-- Center elements -->
+          <div class="hidden md:flex gap-10" id="nav-menu">
+            <button class="text-lg font-semibold  px-2 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0] active" onclick="mainpage()">Home</button>
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+
+            <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70 text-[#E0E0E0]" onclick="Explore()">Explore More</button>
+          </div>
+
+        <div class="hidden md:flex gap-10">
+          
+          
+          <!-- profile -->
+          <button onclick="Menubar()" id="Profile"  class="px-1 hidden md:block  border-2 bor rounded-full w-11 h-11 border-orange-600">
+            <img id="view-profile-image1" src="https://th.bing.com/th/id/OIP.lUn7vSETM_EoDN8ULVyVfwHaHa?pid=ImgDet&w=199&h=199&c=7&dpr=1.4" alt="Profile Picture"  class="rounded-full">
+            
+          </button>
+        </div>
+
+          <!-- toggle menu <i>-->
+          <button class="p-2 md:hidden" onclick="handlemenu()">
+            <i class="fa-solid fa-bars fa-lg text-[#E0E0E0]"></i>
+          </button>
+
+          <!-- Mobile -->
+          <div id="new-dialog" class=" hidden md:hidden fixed bg-[#1E1E1E] inset-0 p-3 h-52 z-50">
+            <!-- Brand logo -->
+            <div id="nav-bar" class="flex justify-between">
+              <a class="flex gap-2 items-center" href="#" id="brand" >
+                <img class="object-cover max-w-12 max-h-12 rounded-full" src="Kahaniyaa.png" alt="logo">
+                <span class="text-2xl font-medium font-display text-orange-400">Kahaniyaa</span>
+            </a>
+            <!-- Close <i> -->
+            <button class="p-2 md:hidden" onclick="handlemenu()">
+              <i class="fa-solid fa-xmark fa-lg text-orange-400"></i>
+            </button>
+            </div>
+            <!-- Center elements -->
+            <div class="mt-2 bg-[#1E1E1E]">
+              <a class="font-medium mx-2 my-2 p-2 block rounded-md hover:bg-orange-600 hover:text-white text-[#E0E0E0]" href="#" >Home</a>
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="audio()">Audiobook</button>
+              <button class="text-lg font-semibold px-1 py-1 rounded-xl hover:text-[#E0E0E0]/70  text-[#E0E0E0]"  onclick="book()">Book</button>
+             
+
+              <!-- Profile <i> -->
+              <button class="mx-3 my-3 border-2 bor rounded-full w-12 h-12 border-orange-600">
+                <i class="fa-solid fa-user fa-xl text-[#E0E0E0]" ></i>
+              </button>
+            </div>
+      </nav>
+
+      <!-- Carousel -->
+      <div id="demo" class="carousel slide position-relative" data-bs-ride="carousel">
+              <!-- Indicators/dots -->
+              <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#demo" data-bs-slide-to="0"class="active"></button>
+                  <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                  <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                  <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+              </div>
+              <!-- The slideshow/carousel -->
+              <div class="carousel-inner">
+                  <div class="carousel-item active " onclick="loadVideo(this)" id="cartoon3">
+                      <img src="static/The Little Red Hen.jpg" class="w-full h-96" alt="Image1">
+                  </div>
+                  <div class="carousel-item">
+                      <img src="static/TWIN FLAMES.jpg" class="w-full h-96" alt="Image2" id="A1" onclick="loadVideo(this)">
+                  </div>
+                  <div class="carousel-item">
+                      <img src="static/WHO ARE YOU.jpg" class="w-full h-96" alt="Image3" id="A3" onclick="loadVideo(this)">
+                  </div>
+                  <div class="carousel-item">
+                      <img src="static/The Emperor's New Clothes.jpg" class="w-full h-96" alt="Image4" id="cartoon4" onclick="loadVideo(this)">
+                  </div>
+              </div>
+          </div>
+
+      <!-- Watchlist -->
+      <div class="mt-6 h-auto w-100 flex flex-wrap flex-col items-center ">
+      <div class="text-center text-white font-bold text-3xl">Stories</div>
+      </div>
+
+      <div class="w-full h-auto grid grid-cols-1 md:grid-cols-3 gap-5 p-3">
+          
+        <div class="max-w-90 h-80 perspective group border-2 shadow-gray-400 shadow-md  items-center mt-3 mb-3  bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2 duration-300">
+          <!-- Card Inner -->
+          <div class="flip-card relative w-full h-full" id="A1" onclick="loadVideo(this)">
+              
+              <!-- Front Side -->
+              <div class="card-front flex flex-col  justify-between ">
+                  <img class="w-full h-48 object-cover rounded-lg" src="static/TWIN FLAMES.jpg" alt="">
+                 <div class="text-center p-4">
+                <p class="text-xl font-extrabold  text-white">TWIN FLAMES</p>
+                <p class="text-lg font-bold text-slate-600">Romance</p>
+            </div>
+              </div>
+      
+              <!-- Back Side -->
+              <div class="italic bg-yellow-500 card-back overflow-auto text-center flex items-center justify-center  w-full h-full">
+                "Twin Flames" is a romantic short film that tells the captivating tale of Naina and Aman. As fate intertwines their paths, the narrative explores the profound connection between the two characters, delving into themes of destiny and love.
+              </div>
+      
+          </div>
+      </div>
+
+      <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+        <!-- Card Inner -->
+        <div class="flip-card relative w-full h-full" id="A2" onclick="loadVideo(this)">
+            
+            <!-- Front Side -->
+            <div class="card-front flex flex-col  justify-between h-full">
+                <img class="w-full h-48 pt-0 object-cover rounded-lg" src="static/The Bear and the Bee.jpg" alt="">
+                <div class=" text-center p-4">
+                  <p class="text-xl font-extrabold text-white">THE BEAR AND THE BEE</p>
+                  <p class="text-lg font-bold text-slate-600">Cartoon</p>
+              </div>
+            </div>
+            
+
+    
+            <!-- Back Side -->
+            <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full  italic">
+              The Bear and the Bee" is a fun story about a bear who wants honey but doesn’t know how to ask the bees nicely.A simple and sweet tale for young kids!
+            </div>
+    
+        </div>
+    </div>
+      
+    <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+      <!-- Card Inner -->
+      <div class="flip-card relative w-full h-full" id="A3" onclick="loadVideo(this)">
+          
+          <!-- Front Side -->
+          <div class="card-front flex flex-col items-center justify-between h-full">
+              <img class="w-full h-48 object-cover rounded-lg" src="static/WHO ARE YOU.jpg" alt="">
+              <div class="p-4 text-center">
+                  <p class="text-xl font-extrabold text-white">WHO ARE YOU?</p>
+                  <p class="text-lg font-bold text-slate-600">Feel Good</p>
+              </div>
+          </div>
+  
+          <!-- Back Side -->
+          <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full  italic">
+            The video titled "Who are you?" appears to be a personal or motivational piece. However, specific details about its content are limited. The video's description suggests it may be related to maintaining concentration during work or study sessions, possibly utilizing the Pomodoro technique. For a comprehensive understanding, it's recommended to watch the video directly.
+          </div>
+  
+      </div>
+  </div>
+   
+      
+          <!-- Div-1 -->
+          <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+            <!-- Card Inner -->
+            <div class="flip-card relative w-full h-full" id="B1" onclick="loadVideo(this)">
+                
+                <!-- Front Side -->
+                <div class="card-front flex flex-col items-center justify-between h-full">
+                    <img class="w-full h-48 object-cover rounded-lg" src="static/TEEN BULLYING.jpg" alt="">
+                    <div class="p-4 text-center">
+                        <p class="text-xl font-extrabold text-white">TEEN BULLY</p>
+                        <p class="text-lg font-bold text-slate-600">Motivational</p>
+                    </div>
+                </div>
+        
+                <!-- Back Side -->
+                <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full italic">
+                  Teen Bullying" is an award-winning Hindi short film by Content Ka Keeda.It highlights the struggles of teenagers facing bullying and its emotional impact, delivering a powerful message on empathy and awareness
+                </div>
+        
+            </div>
+        </div>
+          <!-- Div-2 -->
+          <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+            <!-- Card Inner -->
+            <div class="flip-card relative w-full h-full" id="B2" onclick="loadVideo(this)">
+                
+                <!-- Front Side -->
+                <div class="card-front flex flex-col items-center justify-between h-full">
+                    <img class="w-full h-48 object-cover rounded-lg" src="static/Rapunzel.jpg" alt="">
+                    <div class="p-4 text-center">
+                        <p class="text-xl font-extrabold text-white">RAPUNZEL</p>
+                        <p class="text-lg font-bold text-slate-600">Cartoon</p>
+                    </div>
+                </div>
+        
+                <!-- Back Side -->
+                <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full italic">
+                  A girl with long, magical hair is locked in a tower by a witch. A prince hears her singing, climbs her hair, and they become friends. Together, they find a way to escape and live happily ever after.
+                </div>
+        
+            </div>
+        </div>
+          <!-- Div-3 -->
+          <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+            <!-- Card Inner -->
+            <div class="flip-card relative w-full h-full" id="B3" onclick="loadVideo(this)">
+                
+                <!-- Front Side -->
+                <div class="card-front flex flex-col  items-center justify-between h-full">
+                    <img class="w-full h-48 object-cover rounded-lg" src="static/Double Vision.jpg" alt="">
+                    <div class="p-4 text-center">
+                        <p class="text-xl font-extrabold text-white">DOUBLE VISION</p>
+                        <p class="text-lg font-bold text-slate-600">Horror</p>
+                    </div>
+                </div>
+        
+                <!-- Back Side -->
+                <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full italic">
+                  A girl with long, magical hair is locked in a tower by a witch. A prince hears her singing, climbs her hair, and they become friends. Together, they find a way to escape and live happily ever after.
+                </div>
+        
+            </div>
+        </div>
+        
+
+        <!--Row-3 -->
+    
+          <!-- Div-1 -->
+          <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+            <!-- Card Inner -->
+            <div class="flip-card relative w-full h-full" id="C1" onclick="loadVideo(this)">
+                
+                <!-- Front Side -->
+                <div class="card-front flex flex-col items-center justify-between h-full">
+                    <img class="w-full h-48 object-cover rounded-lg" src="static/DON'T GIVE UP.jpg" alt="">
+                    <div class="p-4 text-center">
+                        <p class="text-xl font-extrabold text-white">DON'T GIVE UP</p>
+                        <p class="text-lg font-bold text-slate-600">Motivational</p>
+                    </div>
+                </div>
+        
+                <!-- Back Side -->
+                <div class="card-back bg-yellow-500 flex items-center  text-center justify-center w-full h-full italic">
+                  "Don't Give Up" is a motivational short film by Vinyl Films featuring Syed Taufiq. The narrative centers on the theme of perseverance, illustrating the struggles individuals face when, despite their best efforts, they don't achieve their desired outcomes. The film serves as an inspiring reminder of the importance of resilience and determination in the face of adversity
+
+
+                </div>
+        
+            </div>
+        </div>
+          <!-- Div-2 -->
+           
+          <div class="max-w-90 h-80 perspective group  items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2  shadow-gray-400 shadow-md duration-300">
+            <!-- Card Inner -->
+            <div class="flip-card relative w-full h-full" id="C2" onclick="loadVideo(this)">
+                
+                <!-- Front Side -->
+                <div class="card-front flex flex-col items-center justify-between h-full">
+                    <img class="w-full h-48 object-cover rounded-lg" src="static/PARISHRAM.jpg" alt="">
+                    <div class="p-4 text-center">
+                        <p class="text-xl font-extrabold text-white">PARISHRAM</p>
+                        <p class="text-lg font-bold text-slate-600">Motivational</p>
+                    </div>
+                </div>
+        
+                <!-- Back Side -->
+                <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full italic">
+                  "परिश्रम - THE LAST OPTION" is an inspiring short film presented by M2R Entertainment. The narrative centers on the theme of perseverance, highlighting the journey of individuals who, despite facing numerous challenges, continue to strive towards their goals. The film emphasizes the importance of hard work and determination as the ultimate means to overcome obstacles and achieve success.
+                </div>
+        
+            </div>
+        </div>
+          <!-- Div-3 -->
+          <div class="max-w-90 h-80 perspective group items-center mt-3 mb-3 border bg-[#1E1E1E] rounded-xl hover:scale-105 hover:ring-4 hover:ring-orange-600 p-2 shadow-gray-300 shadow-md duration-300">
+            <!-- Card Inner -->
+            <div class="flip-card relative w-full h-full" id="C3" onclick="loadVideo(this)">
+                
+                <!-- Front Side -->
+                <div class="card-front flex flex-col items-center justify-between h-full">
+                    <img class="w-full h-48 object-cover rounded-lg" src="static/NOISE.jpg" alt="">
+                    <div class="p-4 text-center">
+                        <p class="text-xl font-extrabold text-white">NOICE</p>
+                        <p class="text-lg font-bold text-slate-600">Motivational</p>
+                    </div>
+                </div>
+        
+                <!-- Back Side -->
+                <div class="card-back bg-yellow-500 flex items-center text-center justify-center w-full h-full italic">
+                  "Noise - The Rickshawala" is an award-winning Hindi short film that delves into the life of Munna, a rickshaw puller, and Stuti, a young woman. The narrative explores themes of anger and interpersonal conflicts, highlighting how everyday interactions can escalate due to underlying frustrations. The film offers a poignant look at human emotions and the impact of uncontrolled anger on relationships.
+                </div>
+        
+            </div>
+        </div>
+        </div>
+ 
+
+    <!-- Footer -->
+    <footer>
+      <div class="p-2 bg-gray-800 text-gray-200">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row flex-wrap justify-around gap-2">
+            <!-- First div (Wider width) -->
+            <div class="flex-2 mb-2 me-4 md:w-1/2">
+              <h4 class="text-2xl pb-4">Kahaniyaa</h4>
+              <p class="text-gray-500 text-justify">
+                "Kahaniyaa" is your one-stop destination for immersive stories and engaging experiences. We believe in the power of storytelling to inspire, educate, and connect people across the globe. Whether you're a fan of fantasy, thrillers, or educational tales, Kahaniyaa has something for everyone.
+              </p>
+            </div>
+
+            <!-- Second div (Smaller width) -->
+            <div class="flex-1 mb-2 mt-2 md:w-1/4">
+              <h4 class="pb-4 font-bold">Contact Us</h4>
+              <ul class="text-gray-500">
+                <li class="mt-1 pb-4"><strong>Email:</strong> Kahaniyaa@gmail.com <br></li>
+                <li class="pb-4"><a href="#" class="hover:text-[#E0E0E0]"><strong>Phone:</strong> +91-7069241235</a></li>
+                <li class="mt-1 pb-4"><strong>Address:</strong> <p>101,Mapple Tree,Thaltej,<br>Ahmedabad-360061,Gujarat,India</p></li>
+              </ul>
+            </div>
+
+            <!-- Third div (Smaller width) -->
+            <div class="flex-1 mb-2 mt-2 md:w-1/4">
+              <h4 class="pb-4 mt-1 font-bold">Useful Links</h4>
+              <ul class="text-gray-500">
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold    rounded-xl hover:text-[#E0E0E0]/70 active" onclick="mainpage()">Home</button></li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold  rounded-xl hover:text-[#E0E0E0]/70  "  onclick="audio()">Audiobook</button> </li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold   rounded-xl hover:text-[#E0E0E0]/70  "  onclick="book()">Book</button></li>
+                <li class="pb-4"><i class="fa fa-chevron-right text-[#E0E0E0]"></i> <button class="text-lg font-semibold   rounded-xl hover:text-[#E0E0E0]/70 " onclick="Explore()">Explore More</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full bg-gray-900 text-gray-500 px-10">
+        <div class="max-w-7xl py-4 mx-auto flex flex-col md:flex-row justify-between items-center">
+          <div class="text-center md:text-left">
+            <div>
+              Copywrite <strong><span>company</span></strong>. All Rights Reserved
+            </div>
+          </div>
+          <div class="text-center text-xl text-white mb-1 mt-1">
+            <a href="https://x.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-twitter fa-xl"></i></a>
+            <a href="https://instagram.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-instagram fa-xl"></i></a>
+            <a href="https://facebook.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-facebook fa-xl"></i></a>
+            <a href="https://in.linkedin.com" class="w-12 h-12 rounded-full bg-yellow-400 text-white hover:bg-yellow-600 px-1 inline-block pt-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/homepage.js') }}" defer></script>
+          
+
+</body>
+</html>
